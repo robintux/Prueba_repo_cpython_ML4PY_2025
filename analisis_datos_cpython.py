@@ -31,7 +31,23 @@ plt.gca().invert_yaxis()
 plt.savefig("Cpython_top10_developers.png", dpi = 300)
 plt.show()
 
+# =============================================================================
+# Cambios agregados en otra computadora (Sistema Operativo : Windows 11)
+# =============================================================================
 
+# Análisis de complejidad: Líneas añadidas/eliminadas por año
+cpython['net_changes'] = cpython['lines_added'] - cpython['lines_removed']
+annual_changes = cpython.groupby('year')[['lines_added', 'lines_removed', 'net_changes']].sum()
+
+fig, ax = plt.subplots(figsize=(14,6))
+ax.bar(annual_changes.index, annual_changes['lines_added'], label='Added', alpha=0.7)
+ax.bar(annual_changes.index, -annual_changes['lines_removed'], label='Removed', alpha=0.7)
+ax.axhline(0, color='black', linewidth=0.5)
+ax.set_title("Net Code Changes in CPython per Year")
+plt.savefig("Cpython_cambios_por_year", dpi = 300)
+
+ax.legend()
+plt.show()
 
 
 
